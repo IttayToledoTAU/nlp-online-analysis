@@ -4,7 +4,7 @@ from datetime import datetime
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import LatentDirichletAllocation as LDA
 
-df = pd.read_csv('3000first.csv', engine='python', encoding='utf-8')
+df = pd.read_csv('1to400_240.csv', engine='python', encoding='utf-8')
 df['post_raw'] = df['post'].copy()
 
 # Remove punctuation
@@ -39,13 +39,13 @@ count_vectorizer = CountVectorizer(
     token_pattern='[^\\s][^\\s]+', max_df=1.0,
     min_df=5)
 count_data = count_vectorizer.fit_transform(df_g['post'])
-n_topics = 20
+n_topics = 8
 lda = LDA(n_components=n_topics, random_state=2)
 
 print('%s\tTraining model' % datetime.now().time())
 lda.fit(count_data)
 words = count_vectorizer.get_feature_names()
-out = open('lda3.txt', 'w', encoding='utf-8')
+out = open('lda1.txt', 'w', encoding='utf-8')
 for topic_idx, topic in enumerate(lda.components_):
     out.write('\n\nTopic #%d:\n    ' % topic_idx)
     out.write('\n    '.join(words[i] for i in topic.argsort()[:-20:-1]))

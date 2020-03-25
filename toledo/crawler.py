@@ -73,4 +73,4 @@ def thread_content(thread_ids, file, verbose=True):
     df.to_csv(file, encoding='utf-8')
 
 
-thread_content(thread_ids(range(1, 240)), '1to240.csv')
+thread_content(thread_ids(range(1, 400)), '1to400.csv')
